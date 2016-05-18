@@ -1,0 +1,2 @@
+module DbagsHelper
+end

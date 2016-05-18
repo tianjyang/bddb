@@ -1,0 +1,16 @@
+<h1>Report a Bad Driver!</h1>
+<p>
+  <%= form_for :dbags, url: dbags_path do |f| %>
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :summary %><br>
+    <%= f.text_area :summary %>
+  </p>
+  <p>
+    <%= f.submit %>
+
+  </p>
+<% end %>
