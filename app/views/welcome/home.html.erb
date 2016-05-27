@@ -1,17 +1,28 @@
 <h1>Welcome to Bad Driver Database!</h1>
-<p> Has someone pissed you off? 
-<%= link_to('Report that fucker!',new_dbag_url) %>
+<p> Has someone pissed you off? Report that fucker!
 </p>
   <%= form_for @newbag, url: @newbag_path do |f| %>
   <p>
+    <table border="0" class="entry">
+    <td><div class ="plate_num">
+    <%= f.label "Plate Num" %><br>
+    <%= f.text_area :plate_num %>
+    </td>
+    </div>
+    <td><div class="title">
     <%= f.label :title %><br>
-    <%= f.text_field :title %><br>
-
+    <%= f.text_area :title %><br>
+    </td>
+    </div>
+    <td><div class ="summary">
     <%= f.label :summary %><br>
     <%= f.text_area :summary %>
-  </p>
-  <p>
+    </td>
+    </div>
+    </table>
+    <%= f.select :make, @make %>
     <%= f.submit %>
+    
 
   </p>
 <% end %>
@@ -19,10 +30,15 @@
 
 
 <h2> Recently Reported Bastards</h2>
-
+<table border="1">
 <% @dbags.reverse_each do |x| %>
-<p>
-  <%= x.title %>
-  <%= x.summary %>
-</p>
+  <tr>
+  <td><%= x.id %></td>
+  <td><%= x.plate_num %></td>
+  <td><%= x.title %></td>
+  <td><%= x.summary %></td>
+  
 <% end %>
+
+  
+</table>

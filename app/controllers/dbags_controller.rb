@@ -1,4 +1,5 @@
 class DbagsController < ApplicationController
+  
   def new
   end
   
@@ -10,7 +11,7 @@ class DbagsController < ApplicationController
   
 private
   def dbag_params
-    params.require(:dbag).permit(:title, :summary)
+    params.require(:dbag).permit(:title, :summary, :plate_num)
   end
   
 end
