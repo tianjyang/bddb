@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160527005436) do
+ActiveRecord::Schema.define(version: 20160530214010) do
 
   create_table "dbags", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20160527005436) do
     t.string   "title"
     t.text     "summary"
     t.string   "plate_num"
-    t.string   "make"
+    t.integer  "make_id"
   end
 
   create_table "makes", force: :cascade do |t|

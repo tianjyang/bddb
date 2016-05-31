@@ -1,28 +1,35 @@
-<h1>Welcome to Bad Driver Database!</h1>
-<p> Has someone pissed you off? Report that fucker!
-</p>
+<head>
+  <%= stylesheet_link_tag "bootstrap.css", media: "all" %>
+</head>
+<div class="container">
+<div class="row">
+<h1 class="col-md-12 text-center">Welcome to Bad Driver Database!</h1>
+</div>
+
+<p class="text-center"> A safe place to passive-aggressively complain about the horrible drivers on the road.</p>
+<p class="text-center"> Has someone pissed you off? Report that fucker!</p>
+
+<div class="row">
   <%= form_for @newbag, url: @newbag_path do |f| %>
-  <p>
-    <table border="0" class="entry">
-    <td><div class ="plate_num">
-    <%= f.label "Plate Num" %><br>
+    <div class="form-group col-md-4">
+    <%= f.label "Plate Num" %>
     <%= f.text_area :plate_num %>
-    </td>
     </div>
-    <td><div class="title">
-    <%= f.label :title %><br>
-    <%= f.text_area :title %><br>
-    </td>
+    
+    <div class="form-group col-md-4">
+    <%= f.label :title %>
+    <%= f.text_area :title %>
     </div>
-    <td><div class ="summary">
-    <%= f.label :summary %><br>
+    
+    <div class="form-group col-md-4">
+    <%= f.label :summary %>
     <%= f.text_area :summary %>
-    </td>
     </div>
-    </table>
+    
     <%= f.select :make, @make %>
     <%= f.submit %>
     
+</div>
 
   </p>
 <% end %>
@@ -39,6 +46,7 @@
   <td><%= x.summary %></td>
   
 <% end %>
+</div>
 
   
 </table>
