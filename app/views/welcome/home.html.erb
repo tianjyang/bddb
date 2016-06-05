@@ -1,52 +1,72 @@
 <head>
   <%= stylesheet_link_tag "bootstrap.css", media: "all" %>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+      $('#title-input').on('click', function() {
+        console.log('hi');
+      })
+    });
+    var a = document.body.scrollTop;
+    if (true||a > 10) {
+      document.getElementById("#hide_me").style.visibility = "hidden";
+    }
+</script>
 </head>
 <div class="container">
 <div class="row">
 <h1 class="col-md-12 text-center">Welcome to Bad Driver Database!</h1>
 </div>
 
-<p class="text-center"> A safe place to passive-aggressively complain about the horrible drivers on the road.</p>
-<p class="text-center"> Has someone pissed you off? Report that fucker!</p>
 
+
+<p class="text-center" id="hide_me"> A safe place to passive-aggressively complain about the horrible drivers on the road.</p>
+<p class="text-center" id="hide_me2"> Has someone pissed you off? Report that fucker!</p>
+
+<form class="new_dbag" id="new_dbag" action="/dbags/" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 <div class="row">
-  <%= form_for @newbag, url: @newbag_path do |f| %>
-    <div class="form-group col-md-4">
-    <%= f.label "Plate Num" %>
-    <%= f.text_area :plate_num %>
-    </div>
-    
-    <div class="form-group col-md-4">
-    <%= f.label :title %>
-    <%= f.text_area :title %>
-    </div>
-    
-    <div class="form-group col-md-4">
-    <%= f.label :summary %>
-    <%= f.text_area :summary %>
-    </div>
-    
-    <%= f.select :make, @make %>
-    <%= f.submit %>
-    
+  <div class="form-group col-md-2">
+    <label for="Dbag_title">Title</label>
+    <input id="title-input" type="text" class="form-control" name="dbag[title]" placeholder="Short Summary">
+  </div>
+  <div class="form-group col-md-10">
+    <label for="Dbag_summary">Summary</label>
+    <input type="text" class="form-control" name="dbag[summary]" placeholder="The full juicy details">
+  </div>
 </div>
+  <div class="row">
+    <div class="form-group col-md-2">
+      <label for="Dbag_make">Make</label>
+      <select class="form-control" name="dbag[make]" placeholder="Select Make">
+        <%= @make.each do |x| %>
+        <option>
+          <%= x %>
+        </option>
+          <% end %>
+      </select>
+    </div>
+    <div class="form-group col-md-8">
+      
+    </div>
+    <div class="form-group col-md-2 ">
+      <button type="submit" name="commit" class="btn btn-default">Report that Dbag!</button>
+    </div>
+  </div>
+</div>
+</form>
 
-  </p>
-<% end %>
-
-
-
-<h2> Recently Reported Bastards</h2>
-<table border="1">
+<div class="container">
+<h2 class="text-center"> Recently Reported Bastards</h2>
 <% @dbags.reverse_each do |x| %>
-  <tr>
-  <td><%= x.id %></td>
-  <td><%= x.plate_num %></td>
-  <td><%= x.title %></td>
-  <td><%= x.summary %></td>
-  
+<div class="row">
+  <%= x.id %>
+  <%= x.plate_num %>
+  <%= x.title %>
+  <%= x.summary %>
+</div>
 <% end %>
 </div>
 
   
-</table>
+</div>
