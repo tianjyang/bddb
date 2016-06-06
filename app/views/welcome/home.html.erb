@@ -63,23 +63,24 @@
     </div>
   </div>
 </div>
-
 <div class="container">
-  <h2 class="text-center"> Recently Reported Bastards</h2>
-  <div class="panel">
+  
+<h2 class="text-center"> Recently Reported Bastards</h2>
+<% @dbags.reverse_each do |x| %>
+  <div class="panel panel-primary">
   <div class="row">
     <div class="col-xs-3">
       <img class = "img-responsive" src="http://placehold.it/200x200">
     </div>
     <div class="col-xs-9">
-      <h3>Horrible Asian Mother Driver! <small> The Red Audi that Tailgated me</small></h3>
-      <p> This lady is absolutely insane. First she swerved across five lanes of traffic to catch her exit. She had to slam on her brakes to avoid running into everyone else!</p>
+      <h3><%= x.title %> <small> The <%= x.make.name %> that Tailgated me</small></h3>
+      <p> <%= x.summary %></p>
     </div>
   </div>
   </div>
-</div>
-  
 
+<% end %>
+</div>
 
 
 <% @dbags.reverse_each do |x| %>
