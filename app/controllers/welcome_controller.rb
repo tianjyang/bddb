@@ -1,10 +1,16 @@
 class WelcomeController < ApplicationController
   def home
     @newbag = Dbag.new
-    @dbags = Dbag.all
+    
+    @dbags = []
+    a = Dbag.maximum("id")
+    for x in (a-10..a) do
+      @dbags << Dbag.find(x)
+    end
+    
     @make = []
     holder = Make.all
-    holder.each do |x|
+    Make.all.each do |x|
       @make << x.name
     end
   end

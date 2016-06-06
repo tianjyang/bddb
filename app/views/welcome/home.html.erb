@@ -2,15 +2,7 @@
   <%= stylesheet_link_tag "bootstrap.css", media: "all" %>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script>
-    $(document).ready(function(){
-      $('#title-input').on('click', function() {
-        console.log('hi');
-      })
-    });
-    var a = document.body.scrollTop;
-    if (true||a > 10) {
-      document.getElementById("#hide_me").style.visibility = "hidden";
-    }
+
 </script>
 </head>
 <div class="container">
@@ -18,23 +10,78 @@
     <div class="col-xs-3">
       <img class = "img-responsive" src="http://placekitten.com/200/200">
     </div>
-    <div class="col-xs-8">
+    <div class="col-xs-9">
+      <fieldset class="form-group">
+      <form action="/dbags/" method="post">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
       <div class="row">
-       <p>texst test</p>
+        <div class="col-xs-4">
+          <label for="dbag[:color]">Color</label>
+          <input type="text" class="form-control" name="dbag[:model]">
+        </div>
+        <div class="col-xs-4">
+          <label for="dbag[:model]">Make</label>
+          <select class="form-control" name="dbag[make]" placeholder="Select Make">
+            <%= @make.each do |x| %>
+            <option>
+            <%= x %>
+            </option>
+            <% end %>
+          </select>
+        </div>
+        <div class="col-xs-4">
+            <label for="dbag[:make]">Plate No.</label>
+            <input type="text" class="form-control" name="dbag[:plate_num]">
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-xs-6">
+          <label for="dbag[:title]">Title</label>
+          <input type="text" class="form-control" name="dbag[:title]">
+        </div>
+        <div class="col-xs-4">
+          <label for="dbag[:incident]">Type of Offense</label>
+          <input type="text" class="form-control" name="dbag[:incident]">
+        </div>
       </div>
       <div class="row">
-        more text text
+        <div class="col-xs-9">
+          <label for="dbag[:summary]">Summary</label>
+          <input type="text" class="form-control" name="dbag[:summary]">
+        </div>
+        <div class="col-xs-3 text-right" style="margin-top:25px">
+          <button type="submit" name="commit" class="btn btn-primary">
+          Report that Fucker!
+          </button>
+        </div>
+      </div>
+          </form>
+        </fieldset>
       </div>
     </div>
   </div>
 </div>
 
-
-
-
-
 <div class="container">
-<h2 class="text-center"> Recently Reported Bastards</h2>
+  <h2 class="text-center"> Recently Reported Bastards</h2>
+  <div class="panel">
+  <div class="row">
+    <div class="col-xs-3">
+      <img class = "img-responsive" src="http://placehold.it/200x200">
+    </div>
+    <div class="col-xs-9">
+      <h3>Horrible Asian Mother Driver! <small> The Red Audi that Tailgated me</small></h3>
+      <p> This lady is absolutely insane. First she swerved across five lanes of traffic to catch her exit. She had to slam on her brakes to avoid running into everyone else!</p>
+    </div>
+  </div>
+  </div>
+</div>
+  
+
+
+
 <% @dbags.reverse_each do |x| %>
 <div class="row">
   <%= x.id %>
