@@ -1,0 +1,4 @@
+Command to start a local server is
+rails s -p $PORT -b $IP
+Webpage is listed at
+https://rubyonrails-tianjyang.c9users.io/

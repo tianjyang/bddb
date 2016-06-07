@@ -11,7 +11,7 @@ class DbagsController < ApplicationController
   
 private
   def dbag_params
-    params.require(:dbag).require(:title, :summary, :plate_num, :make, :color, :incident)
+    params.require(:dbag).permit(:title, :summary, :plate_num, :make, :color, :incident)
 
     
     

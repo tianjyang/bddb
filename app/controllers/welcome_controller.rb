@@ -2,23 +2,24 @@ class WelcomeController < ApplicationController
   def home
     @dbags = []
     a = Dbag.maximum("id")
-    for x in (a..a) do
+    for x in (a-3..a) do
       @dbags << Dbag.find(x)
     end
     
-    @make = []
+    @color = [""]
+    Color.all.each do |x|
+      @color << x.name
+    end
+    
+    @make = [""]
     Make.all.each do |x|
       @make << x.name
     end
     
-    @incident = []
+    @incident = [""]
     Incident.all.each do |x|
       @incident << x.name
     end
-    
-    @color = []
-    Color.all.each do |x|
-      @color << x.name
-    end
   end
+
 end
