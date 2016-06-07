@@ -11,15 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160530214010) do
+ActiveRecord::Schema.define(version: 20160606233840) do
+
+  create_table "colors", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "dbags", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.string   "title"
     t.text     "summary"
     t.string   "plate_num"
     t.integer  "make_id"
+    t.integer  "color_id"
+    t.integer  "incident_id"
+  end
+
+  create_table "incidents", force: :cascade do |t|
+    t.string   "name"
+    t.string   "descrip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "makes", force: :cascade do |t|

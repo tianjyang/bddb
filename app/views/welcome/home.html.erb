@@ -17,10 +17,16 @@
       <div class="row">
         <div class="col-xs-4">
           <label for="dbag[:color]">Color</label>
-          <input type="text" class="form-control" name="dbag[:model]">
+          <select class="form-control" name="dbag[color]" placeholder="Select Color">
+            <%= @color.each do |x| %>
+            <option>
+            <%= x %>
+            </option>
+            <% end %>
+          </select>
         </div>
         <div class="col-xs-4">
-          <label for="dbag[:model]">Make</label>
+          <label for="dbag[make]">Make</label>
           <select class="form-control" name="dbag[make]" placeholder="Select Make">
             <%= @make.each do |x| %>
             <option>
@@ -30,26 +36,32 @@
           </select>
         </div>
         <div class="col-xs-4">
-            <label for="dbag[:make]">Plate No.</label>
-            <input type="text" class="form-control" name="dbag[:plate_num]">
+            <label for="dbag[plate_num]">Plate No.</label>
+            <input type="text" class="form-control" name="dbag[plate_num]">
         </div>
       </div>
 
 
       <div class="row">
         <div class="col-xs-6">
-          <label for="dbag[:title]">Title</label>
-          <input type="text" class="form-control" name="dbag[:title]">
+          <label for="dbag[title]">Title</label>
+          <input type="text" class="form-control" name="dbag[title]">
         </div>
         <div class="col-xs-4">
-          <label for="dbag[:incident]">Type of Offense</label>
-          <input type="text" class="form-control" name="dbag[:incident]">
+          <label for="dbag[incident]">Type of Offense</label>
+          <select class="form-control" name="dbag[incident]">
+            <%= @incident.each do |x| %>
+            <option>
+            <%= x %>
+            </option>
+            <% end %>
+          </select>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-9">
-          <label for="dbag[:summary]">Summary</label>
-          <input type="text" class="form-control" name="dbag[:summary]">
+          <label for="dbag[summary]">Summary</label>
+          <input type="text" class="form-control" name="dbag[summary]">
         </div>
         <div class="col-xs-3 text-right" style="margin-top:25px">
           <button type="submit" name="commit" class="btn btn-primary">
@@ -73,7 +85,7 @@
       <img class = "img-responsive" src="http://placehold.it/200x200">
     </div>
     <div class="col-xs-9">
-      <h3><%= x.title %> <small> The <%= x.make.name %> that Tailgated me</small></h3>
+      <h3><%= x.title %> <small> The <%= x.color.name %> <%= x.make.name %> that <%= x.incident.descrip %></small></h3>
       <p> <%= x.summary %></p>
     </div>
   </div>
@@ -81,16 +93,6 @@
 
 <% end %>
 </div>
-
-
-<% @dbags.reverse_each do |x| %>
-<div class="row">
-  <%= x.id %>
-  <%= x.plate_num %>
-  <%= x.title %>
-  <%= x.summary %>
-</div>
-<% end %>
 </div>
 
   
