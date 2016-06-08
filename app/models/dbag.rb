@@ -9,7 +9,6 @@ class Dbag < ActiveRecord::Base
     file = File.dirname(__FILE__) + "/seeddata.csv"
     csv_text = File.read(file)
     csv = CSV.parse(csv_text, :headers => true)
-    i = 0
     csv.each do |x|
     hash = {}
     hash[:title]=x[0]

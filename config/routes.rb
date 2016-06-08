@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
+  get '/dbags/morebags/:page' => 'welcome#morebags'
   resources :dbags
-  
   root 'welcome#home'
+  
   # /
   
   # The priority is based upon order of creation: first created -> highest priority.

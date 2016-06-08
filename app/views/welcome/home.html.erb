@@ -31,8 +31,15 @@ $(document).ready(function(){
   $("#dbagContainer").scroll(function(){
     var pos = $("#dbagContainer").scrollTop();
     var criteria = $("div[class*='dbagPanel']").length;
-    criteria = (criteria*222)-400
+    criteria = (criteria*($(".dbagPanel").height()+22))-400
     console.log(pos, criteria);
+    if(pos >= criteria){
+      console.log("GETting more dbags!");
+      var moreBagURL = "/dbags/morebags/" + "1"
+      $.get(moreBagURL,function(data){
+        console.log(data)
+      });
+    }
 })
 
 })

@@ -2,7 +2,7 @@ class WelcomeController < ApplicationController
   def home
     @dbags = []
     a = Dbag.maximum("id")
-    for x in (a-5..a) do
+    for x in (a-9..a) do
       @dbags << Dbag.find(x)
     end
     
@@ -21,10 +21,19 @@ class WelcomeController < ApplicationController
       @incident << x.name
     end
   end
-  
-  def addmorebags
-    
+ 
+ def morebags
+   render nothing: true
+    puts "GET morebags received!"
+    bag_page = params[:page].to_i
+    @dbags = []
+    a = Dbag.maximum("id")-bag_page*10
+    for x in (a-9..a) do
+      @dbags << Dbag.find(x)
+    end
+    tp @dbags
   end
+  
   
 
 end
