@@ -1,14 +1,16 @@
 == README
 
 To Do List
--Create seed data and figure out how to upload it from a spreadsheet
 -Load more dbags when you reach the end of the dbag entries
 -Add picture upload functionality
 -Code a modal to show expanded picture when it is clicked
 -Reformat and move the "Submit DB" elements to a separate modal
 -Add functionality for dbag analytics (rework backend)
+-Current criteria for determining when #dbagContainer reaches bottom of scroll
+ hard coded. Determine how to fix this
 
 Completed List
+-Create seed data and figure out how to upload it from a spreadsheet
 -Add form control to prevent empty entries
 -Add default non-meaningful dropdown menu values
 -Ensure form control detects default dropdown menu values and returns error if found

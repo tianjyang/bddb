@@ -2,7 +2,7 @@ class WelcomeController < ApplicationController
   def home
     @dbags = []
     a = Dbag.maximum("id")
-    for x in (a-3..a) do
+    for x in (a-5..a) do
       @dbags << Dbag.find(x)
     end
     
@@ -21,5 +21,10 @@ class WelcomeController < ApplicationController
       @incident << x.name
     end
   end
+  
+  def addmorebags
+    
+  end
+  
 
 end

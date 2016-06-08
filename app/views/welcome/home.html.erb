@@ -29,8 +29,10 @@ $(document).ready(function(){
   })
   
   $("#dbagContainer").scroll(function(){
-    var offset = $("#dbagPanel").offset()
-  console.log(offset.top, offset.left);
+    var pos = $("#dbagContainer").scrollTop();
+    var criteria = $("div[class*='dbagPanel']").length;
+    criteria = (criteria*222)-400
+    console.log(pos, criteria);
 })
 
 })
@@ -111,7 +113,7 @@ $(document).ready(function(){
 <h2 class="text-center"> Recently Reported Bastards</h2>
 <div class="container dbagcontainer" id="dbagContainer">
 <% @dbags.reverse_each do |x| %>
-  <div class="panel panel-default" id="dbagPanel">
+  <div class="panel panel-default dbagPanel">
   <div class="row">
     <div class="col-xs-3">
       <img class = "img-responsive" src="http://placehold.it/200x200">
