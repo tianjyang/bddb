@@ -1,7 +1,6 @@
 == README
 
 To Do List
--Load more dbags when you reach the end of the dbag entries
 -Add picture upload functionality
 -Code a modal to show expanded picture when it is clicked
 -Reformat and move the "Submit DB" elements to a separate modal
@@ -10,6 +9,7 @@ To Do List
  hard coded. Determine how to fix this
 
 Completed List
+-Load more dbags when you reach the end of the dbag entries
 -Create seed data and figure out how to upload it from a spreadsheet
 -Add form control to prevent empty entries
 -Add default non-meaningful dropdown menu values

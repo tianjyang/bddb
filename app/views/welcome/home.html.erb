@@ -19,6 +19,8 @@ function validateForm(el) {
 
 }
 $(document).ready(function(){
+  var pageCount = 0;
+  var getRunning = false;
   $("#submarine").click(function(event){
     if (validateAll()) {
     }
@@ -33,12 +35,18 @@ $(document).ready(function(){
     var criteria = $("div[class*='dbagPanel']").length;
     criteria = (criteria*($(".dbagPanel").height()+22))-400
     console.log(pos, criteria);
-    if(pos >= criteria){
+    if(pos >= criteria && !getRunning){
+      getRunning = true;
       console.log("GETting more dbags!");
-      var moreBagURL = "/dbags/morebags/" + "1"
+      console.log(pageCount);
+      pageCount = pageCount + 1;
+      console.log(pageCount)
+      var moreBagURL = "/dbags/morebags/" + pageCount;
       $.get(moreBagURL,function(data){
-        console.log(data)
-      });
+        $("#dbagContainer").append(data);
+      }).done(function(){getRunning = false});
+    }else if (pos >= criteria && getRunning){
+      console.log("Attempted GET but it was already running!");
     }
 })
 
@@ -126,7 +134,7 @@ $(document).ready(function(){
       <img class = "img-responsive" src="http://placehold.it/200x200">
     </div>
     <div class="col-xs-9">
-      <h3><%= x.title %> <small> The <%= x.color.name %> <%= x.make.name %> that <%= x.incident.descrip %></small></h3>
+      <h3><%= x.id %>: <%= x.title %> <small> The <%= x.color.name %> <%= x.make.name %> that <%= x.incident.descrip %></small></h3>
       <p> <%= x.summary %></p>
     </div>
   </div>

@@ -1,0 +1,16 @@
+<html>
+  <% @dbags.reverse_each do |x| %>
+  <div class="panel panel-default dbagPanel">
+  <div class="row">
+    <div class="col-xs-3">
+      <img class = "img-responsive" src="http://placehold.it/200x200">
+    </div>
+    <div class="col-xs-9">
+      <h3><%= x.id %>: <%= x.title %> <small> The <%= x.color.name %> <%= x.make.name %> that <%= x.incident.descrip %></small></h3>
+      <p> <%= x.summary %></p>
+    </div>
+  </div>
+  </div>
+
+<% end %>
+</html>
