@@ -33,7 +33,7 @@ $(document).ready(function(){
   $("#dbagContainer").scroll(function(){
     var pos = $("#dbagContainer").scrollTop();
     var criteria = $("div[class*='dbagPanel']").length;
-    criteria = (criteria*($(".dbagPanel").height()+22))-400
+    criteria = (criteria*($(".dbagPanel").height()+22))-$(".dbagcontainer").height() - 10
     console.log(pos, criteria);
     if(pos >= criteria && !getRunning){
       getRunning = true;
