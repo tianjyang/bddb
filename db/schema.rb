@@ -20,10 +20,10 @@ ActiveRecord::Schema.define(version: 20160606233840) do
   end
 
   create_table "dbags", force: :cascade do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
     t.string   "title"
     t.text     "summary"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.string   "plate_num"
     t.integer  "make_id"
     t.integer  "color_id"
