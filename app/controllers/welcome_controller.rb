@@ -2,8 +2,12 @@ class WelcomeController < ApplicationController
   def home
     @dbags = []
     a = Dbag.maximum("id")
-    for x in (a-9..a) do
-      @dbags << Dbag.find(x)
+    
+    if !a.nil?
+      i = minimum(9,a-1)
+      for x in (a-i..a) do
+        @dbags << Dbag.find(x)
+      end
     end
     
     @color = [""]
@@ -29,10 +33,18 @@ class WelcomeController < ApplicationController
     a = Dbag.maximum("id")-bag_page*10
     puts a
     for x in (a-9..a) do
-      @dbags << Dbag.find(x)
+      unless x < 1
+        @dbags << Dbag.find(x)
+      end
     end
   end
   
-  
-
+  private
+  def minimum(num1,num2)
+    if num1 < num2
+      return num1
+    else
+      return num2
+    end
+  end
 end

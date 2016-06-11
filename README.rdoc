@@ -9,6 +9,7 @@ To Do List
  hard coded. Determine how to fix this
 
 Completed List
+-Added logic which prevents errors when no entries in the Dbag database
 -Load more dbags when you reach the end of the dbag entries
 -Create seed data and figure out how to upload it from a spreadsheet
 -Add form control to prevent empty entries
