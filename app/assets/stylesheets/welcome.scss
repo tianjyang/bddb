@@ -3,5 +3,45 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .dbagcontainer{
   overflow-y:scroll;
-  height: 600px;
+  height: 75vh;
+  max-height: 800px;
 }
+
+body{
+  background-image: url(background.jpg);
+  background-attachment: fixed;
+}
+
+
+.panel{
+  background-color: #323861;
+  opacity: 0.6;
+}
+
+.panel-default{
+  border-radius: 10px;
+  border-color: #0c096d;
+  border-width: 3px;
+}
+
+.dbagPanel{
+  height: 200px;
+}
+
+.btn-fixed-width{
+  width:200px;
+}
+
+.auto-margin{
+  margin:auto;
+  align-content: center;
+}
+
+//text colors defined from this point
+
+
+
+// White borders around all elements for debugging
+// * {
+//   border: 1px solid white;
+// }

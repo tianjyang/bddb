@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160611184639) do
+ActiveRecord::Schema.define(version: 20160701013102) do
 
   create_table "colors", force: :cascade do |t|
-    t.string "name"
+    t.string  "name"
+    t.integer "count", default: 0
   end
 
   create_table "dbags", force: :cascade do |t|
@@ -29,12 +30,14 @@ ActiveRecord::Schema.define(version: 20160611184639) do
   end
 
   create_table "incidents", force: :cascade do |t|
-    t.string "name"
-    t.string "descrip"
+    t.string  "name"
+    t.string  "descrip"
+    t.integer "count",   default: 0
   end
 
   create_table "makes", force: :cascade do |t|
-    t.string "name"
+    t.string  "name"
+    t.integer "count", default: 0
   end
 
 end

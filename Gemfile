@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'table_print'
+gem 'paperclip'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
