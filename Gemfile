@@ -15,6 +15,7 @@ end
 group :production do
   gem "pg"
   gem "puma"
+  gem "ar-extensions"
 end
 
 # Use SCSS for stylesheets
