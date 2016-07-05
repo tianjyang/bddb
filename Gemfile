@@ -14,6 +14,7 @@ end
 
 group :production do
   gem "pg"
+  gem "puma"
 end
 
 # Use SCSS for stylesheets
