@@ -41,11 +41,9 @@ private
     color = Color.find(dbag_params[:color_id])
     color.count += 1
     color.save
-    
     make = Make.find(dbag_params[:make_id])
     make.count +=1
     make.save
-    
     incident = Incident.find(dbag_params[:incident_id])
     incident.count += 1
     incident.save
