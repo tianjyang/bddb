@@ -3,7 +3,6 @@ ruby "2.3.0"
 
 gem 'table_print'
 gem 'paperclip'
-gem "ar-extensions"
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
