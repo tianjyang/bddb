@@ -2,8 +2,8 @@ class DbagsController < ApplicationController
   
   def new
   end
-
   
+
   def create
     dbag = Dbag.new(dbag_params)
     dbag.save

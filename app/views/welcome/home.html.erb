@@ -1,7 +1,8 @@
 <head>
-  <!--<%= stylesheet_link_tag "bootstrap.css", media: "all" %>-->
-  <!--<%= stylesheet_link_tag "welcome.scss", media: "all" %>-->
+  <%= stylesheet_link_tag "bootstrap.css", media: "all" %>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <%= stylesheet_link_tag "welcome.css", media: "all" %>
 <script>
 
 function validateAll(){
@@ -21,8 +22,14 @@ function validateForm(el) {
 
 }
 $(document).ready(function(){
+  $("#loading").slideUp("fast",function(){
+    $("#loading").css("visibility","visible")
+  })
   var pageCount = 0;
+  var previousPosition = 0;
   var getRunning = false;
+  var downCount = 0;
+  var upCount = 0;
   $("#submit").click(function(event){
     if (validateAll()) {
     }
@@ -32,153 +39,115 @@ $(document).ready(function(){
     }
   })
   
-  $("#dbagContainer").scroll(function(){
-    var pos = $("#dbagContainer").scrollTop();
+  $(window).scroll(function(){
+    var pos = $("body").scrollTop();
     var criteria = $("div[class*='dbagPanel']").length;
-    criteria = (criteria*($(".dbagPanel").height()+22))-$(".dbagcontainer").height() - 10
-    console.log(pos, criteria);
+    criteria = (criteria*($(".dbagPanel").height()+22))-screen.height- 10
+    // console.log(pos, criteria);
     if(pos >= criteria && !getRunning){
+      $("#loading").slideDown("fast")
       getRunning = true;
-      console.log("GETting more dbags!");
+      // console.log("GETting more dbags!");
       pageCount = pageCount + 1;
       var moreBagURL = "/dbags/morebags/" + pageCount;
       $.get(moreBagURL,function(data){
-        $("#dbagContainer").append(data);
-      }).done(function(){getRunning = false});
+        $("body").append(data);
+      }).done(function(){getRunning = false;
+        $("#loading").slideUp("fast");
+      });
     }else if (pos >= criteria && getRunning){
-      console.log("Attempted GET but it was already running!");
+      // console.log("Attempted GET but it was already running!");
     }
-})
+  })
+
+  $(window).scroll(function(){
+    var pos = $("body").scrollTop();
+    if( pos > previousPosition){
+      // console.log("scrolling down!")
+      previousPosition = pos
+      downCount += 1
+      // console.log(downCount)
+    }else if (pos < previousPosition){
+      // console.log("scrolling up!")
+      previousPosition = pos
+      downCount = 0
+      // console.log(downCount)
+    }
+  
+    if(downCount > 25){
+      $("#buttons").slideUp("fast");
+    }
+    else if (downCount == 0){
+      $("#buttons").slideDown("fast");
+    }
+  })
 
 })
 
+google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        $.getJSON("/analytics/",function(analyticInfo) {
+        // console.log(analyticInfo);
+        var data = google.visualization.arrayToDataTable(analyticInfo)
+
+        var options = {
+          title: 'Reported Makes',
+          hAxis: {slantedText: true, slantedTextAngle: 45},
+          height: 500,
+          width: 700,
+          legend: {position: "none"},
+          chartArea: {left:30, top: 10, width:'90%',height:'auto'}
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+        })
+      }
+      
 
 </script>
 </head>
 <body>
-
-<h1 class="text-center"> Recently Reported Bastards</h1>
-<div class="row text-center">
+<div class="row main-header" id="main-header">
+<h1 class="text-center main-header-text"> Bad Driver Database!</h1>
+<div class="row text-center buttons-div" id="buttons">
   <button type="button" class="btn btn-default btn-fixed-width" data-toggle="modal" data-target="#submitBag">Report New Bastards</button>
   <button type="button" class="btn btn-default btn-fixed-width" data-toggle="modal" data-target="#reviewBag">Bad Driver Metrics</button>
   <button type="button" class="btn btn-default btn-fixed-width">Search</button>
+  <br>
+  <br>
+  <br>
 </div>
-<br>
-<div class="container dbagcontainer" id="dbagContainer">
-<% if @dbags.empty? %>
-  <h3> no dbags reported!</h3>
+</div>
+
+<div class="row" style="height:200px"></div>
+<!--<div class="container dbagcontainer" id="dbagContainer">-->
+  <% if @dbags.empty? %>
+    <h3> no dbags reported!</h3>
   <% else
-  @dbags.reverse_each do |x| %>
-  <div class="panel panel-default dbagPanel">
-  <div class="row">
-    <!--<div class="col-xs-3 auto-margin">-->
-    <!--  <img class = "img-responsive auto-margin" src="http://placehold.it/180x180">-->
-    <!--</div>-->
-    <div class="col-xs-12">
-      <h3><%= x.id %>: <%= x.title %> <small> The <%= x.color.name %> <%= x.make.name %> that <%= x.incident.descrip %></small></h3>
-      <p> <%= x.summary %></p>
-    </div>
-  </div>
-  </div>
-
-<% end
-end %>
-</div>
-</div>
-
-  
-</div>
-</body>
-
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content" style="padding:10px">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Report New Driver</h4>
-      </div>
-      <div class="modal-body">
-      <fieldset class="form-group">
-      <form action="/dbags/" method="post" enctype="multipart/form-data">
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-        
+    @dbags.reverse_each do |x| %>
+    <div class="row">
+      <div class="col-xs-2"></div>
+      <div class="col-xs-8">
+      <div class="panel panel-default dbagPanel">
         <div class="row">
-        <div class="col-xs-12">
-          <label for="title">Title</label>
-          <input id="title" type="text" class="form-control required-field" name="dbag[title]">
-        </div>
-        </div>
-        
-        <div class="row">
-        <div class="col-xs-12">
-          <label for="summary">Summary</label>
-          <input id="summary" type="text" class="form-control required-field" name="dbag[summary]">
-        </div>
-        </div>
-        
-        <div class="row">
-        <div class="col-xs-4">
-          <label for="color">Color</label>
-          <select id="color" class="form-control required-field" name="dbag[color]" placeholder="Select Color">
-            <%= @color.each do |x| %>
-            <option>
-            <%= x %>
-            </option>
-            <% end %>
-          </select>
-        </div>
-        <div class="col-xs-4">
-          <label for="make">Make</label>
-          <select id="make" class="form-control required-field" name="dbag[make]" placeholder="Select Make">
-            <%= @make.each do |x| %>
-            <option>
-            <%= x %>
-            </option>
-            <% end %>
-          </select>
-        </div>
-        <div class="col-xs-4">
-            <label for="plate_num">Plate No.</label>
-            <input id="plate_num" type="text" class="form-control required-field" name="dbag[plate_num]">
+          <div class="col-xs-12">
+            <h3><%= x.id %>: <%= x.title %> <small style="color:#1F4865"> The <%= x.color.name %> <%= x.make.name %> that <%= x.incident.descrip %></small></h3>
+            <p class="dbagSummary"> <%= x.summary %></p>
+          </div>
         </div>
       </div>
-
-        
-        <div class="row">
-        <div class="col-xs-4">
-          <label for="type">Type of Offense</label>
-          <select id="type" class="form-control required-field" name="dbag[incident]">
-            <%= @incident.each do |x| %>
-            <option>
-            <%= x %>
-            </option>
-            <% end %>
-          </select>
-        </div>
-        </div>
-      
-
-      
-      
-      <!--<div class="row">-->
-      <!--  <div class="col-xs-3 text-right" style="margin-top:25px">-->
-      <!--    <button id="submit" type="submit" name="commit" class="btn btn-primary">-->
-      <!--    Report that Fucker!-->
-      <!--    </button>-->
-      <!--  </div>-->
-      <!--</div>-->
-
+      <div class="col-xs-2"></div>
       </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button id="submit" type="submit" name="commit" class="btn btn-primary">Submit New Entry</button>
-                  </form>
-        </fieldset>
-      </div>
-    </div>
-  </div>
+    <% end
+  end %>
+<div class="loading" id="loading">
+  <span style="vertical-align:middle">Loading More Entries...</span>
 </div>
+
 
 <div class="modal fade" id="submitBag" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -252,23 +221,22 @@ end %>
         </fieldset>
     </div>
   </div>
-
-
 <div class="modal fade" id="reviewBag" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content" style="padding:10px">
+    <div class="modal-dialog" style="width:750px" role="document">
+    <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Reported Bad Driver Trends</h4>
       </div>
-      <div class="modal-body">
-
-
-      </div>
-      </div>
+        <div class="modal-body">
+          <div id="piechart"></div>
+        </div>
+    </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
-</div>
+
+
+</body>

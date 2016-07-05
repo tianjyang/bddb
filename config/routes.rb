@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get '/dbags/morebags/:page' => 'welcome#morebags'
   resources :dbags
   root 'welcome#home'
+  get '/analytics/' => 'welcome#analytics'
   
   # /
   

@@ -39,6 +39,17 @@ class WelcomeController < ApplicationController
     end
   end
   
+  def analytics
+    allMakes = Make.all
+    output = []
+    output << ["name","count"]
+    allMakes.each do |x|
+      extraEntry = [x.name,x.count]
+      output << extraEntry
+    end
+    render json: output
+  end
+  
   private
   def minimum(num1,num2)
     if num1 < num2

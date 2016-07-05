@@ -8,14 +8,14 @@
 }
 
 body{
-  background-image: url(background.jpg);
-  background-attachment: fixed;
+  // background-image: url(background.jpg);
+  // background-attachment: fixed;
+  background-color: #CEEDAB;
 }
 
 
 .panel{
-  background-color: #323861;
-  opacity: 0.6;
+  background-color: #5C8099;
 }
 
 .panel-default{
@@ -26,6 +26,8 @@ body{
 
 .dbagPanel{
   height: 200px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .btn-fixed-width{
@@ -35,6 +37,41 @@ body{
 .auto-margin{
   margin:auto;
   align-content: center;
+}
+
+.main-header{
+ position:fixed;
+ left:0;
+ right:0;
+ z-index:1;
+ background-color:#1F4865;
+ padding-bottom:0px;
+}
+
+.loading{
+  color:#BECFDC;
+ text-align: center;
+ position:fixed;
+ left:50%;
+ bottom: 10px;
+ padding-left: 10px;
+ padding-right: 10px;
+ z-index:1;
+ background-color:#1F4865;
+ -webkit-transform: translateX(-50%);
+ visibility: hidden;
+}
+
+.main-header-text{
+ color:#BECFDC;
+}
+
+small{
+  color:#1F4865;
+}
+
+.dbagSummary{
+  color:#BECFDC;
 }
 
 //text colors defined from this point
