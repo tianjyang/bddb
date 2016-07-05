@@ -3,6 +3,7 @@ ruby "2.3.0"
 
 gem 'table_print'
 gem 'paperclip'
+gem "ar-extensions"
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -15,7 +16,6 @@ end
 group :production do
   gem "pg"
   gem "puma"
-  gem "ar-extensions"
 end
 
 # Use SCSS for stylesheets
